@@ -1,0 +1,76 @@
+<!DOCTYPE html> <!-- Compatibilidad con buscadores antiguos -->
+<html lang="en"> <!-- iniciamos la ventana html con preferencia en lenguaje ingles-->
+    <head><!--Header-->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>¡Mokepon!</title>
+        <script src=""></script>
+    </head>
+    <body><!--Body-->
+
+        <!--Titulo principal-->
+        <h1>Mokepon! 🔥💧🌱</h1>
+
+        <!--Seccion para seleccionar mascotas-->
+        <section id="seleccionarMascota">
+            <!--Titulo de la seccion-->
+            <h2>Elige tu mascota:</h2>
+
+            <!--Mascotas-->
+
+            <!-- Hipodoge -> Agua -->
+            <label for="Hipodoge">Hipodoge</label>
+            <input type="radio" name="mascota" id="Hipodoge">
+            
+            <!-- Capipepo -> Tierra -->
+            <label for="Capipepo">Capipepo</label>
+            <input type="radio" name="mascota" id="Capipepo">
+
+            <!-- Ratigueya -> fuego -->
+            <label for="Ratigueya">Ratigueya</label>
+            <input type="radio" name="mascota" id="Ratigueya">
+            
+            <!-- Langostelvis -> Agua y Fuego -->
+            <label for="Langostelvis">Langostelvis</label>
+            <input type="radio" name="mascota" id="Langostelvis">
+            
+            <!-- Tucapalma -> Agua y Tierra -->
+            <label for="Tucapalma">Tucapalma</label>
+            <input type="radio" name="mascota" id="Tucapalma">
+            
+            <!-- Pydos -> Tierra y Fuego -->
+            <label for="Pydos">Pydos</label>
+            <input type="radio" name="mascota" id="Pydos">
+            
+            <!-- Boton para Seleccionar la opcion-->
+            <button>Seleccionar</button>
+
+        </section>
+
+        <!--Seccion para seleccionar ataque-->
+        <section id="seleccionarAtaque">
+            <!--Titulo de la seccion-->
+            <h2>Elige tu ataque:</h2>
+
+            <p>Tu mascota tiene <span>3</span> vidas</p>
+            <p>La mascota del enemigo tiene <span>3</span> vidas</p>
+
+            <p>
+                <button>Fuego 🔥</button>
+                <button>Agua 💧</button>
+                <button>Tierra 🌱</button>
+            </p>
+        </section>
+
+        <!--Seccion para mostrar mensajes-->
+        <section id="mensajes">
+            <p>Tu mascota ataco con fuego, la mascota del enemigo tierra - GANASTE</p>
+        </section>
+
+        <!--Seccion para volver a iniciar-->
+        <section id="reiniciar">
+            <button>Reiniciar</button>
+        </section>
+    </body>
+</html>
