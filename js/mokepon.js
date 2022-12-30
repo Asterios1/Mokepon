@@ -4,30 +4,33 @@ function iniciarJuego(){//funcion que realizar cuando se termine de cargar el ht
 }
 function seleccionarMascotaJugador(){//funcion para que el usuario escoja mascota
     
-    //Definimos los inputs y almacenamos el evento 
+    //Definimos los inputs y almacenamos la etiqueta HTML que tenga el nombre que queremos por ID
     let inputHipodoge = document.getElementById("Hipodoge")
     let inputCapipepo = document.getElementById("Capipepo")
     let inputRatigueya = document.getElementById("Ratigueya")
     let inputLangostelvis = document.getElementById("Langostelvis")
     let inputTucapalma = document.getElementById("Tucapalma")
     let inputPydos = document.getElementById("Pydos")
+    let spanMascotaJugador = document.getElementById("mascotaJugador")
+    let spanMascotaEnemigo = document.getElementById("mascotaEnemigo")
 
-
+    //Realizamos el proceso de seleccion de mascota, revisamos uno por uno de los botones cual esta encendido y cual no para poder saberlo
     if (inputHipodoge.checked == true) { 
-        alert("Escogiste a Hipodoge")
+        spanMascotaJugador.innerHTML="Hipodoge"//.innerHTML nos ayuda a poder ver o capturar el html que hay dentro de la etiqueta span, luego es solo cambiarlo 
     } else if(inputCapipepo.checked == true){//le pasamos el metodo checked para verificar que nuestro input de tipo radio este encendido o apagado y asi poder ver cual escogio el usuario
-        alert("Escogiste a Capipepo")
+        spanMascotaJugador.innerHTML="Capipepo"
     } else if(inputRatigueya.checked == true){
-        alert("Escogiste a Ratigueya")
+        spanMascotaJugador.innerHTML="Ratigueya"
     } else if(inputLangostelvis.checked == true){
-        alert("Escogiste a Langostelvis")
+        spanMascotaJugador.innerHTML="Langostelvis"
     } else if(inputTucapalma.checked == true){
-        alert("Escogiste a Tucapalma")
+        spanMascotaJugador.innerHTML="Tucapalma"
     } else if(inputPydos.checked == true){
-        alert("Escogiste a Pydos")
+        spanMascotaJugador.innerHTML="Pydos"
     } else {
         alert("No pos valista verga compadre")
     }
+
 }
 
 
