@@ -5,7 +5,14 @@ let vidasEnemigo = 3
 
 //Funcion para iniciar el juego cuando el jugador le de click a la mascota
 function iniciarJuego(){//funcion que realizar cuando se termine de cargar el html
-    let botonMascotajugador = document.getElementById("botonMascotas") //creamos una variable y le indicamos al documento (html) que nos traiga lo que tenga el ID deseado
+    //esconder seccion ataque
+    let sectionSeleccionarAtaque = document.getElementById("seleccionarAtaque")
+    sectionSeleccionarAtaque.style.display="none"
+    //esconder seccion reiniciar
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display="none"
+    //creamos una variable y le indicamos al documento (html) que nos traiga lo que tenga el ID deseado
+    let botonMascotajugador = document.getElementById("botonMascotas") 
     botonMascotajugador.addEventListener("click",seleccionarMascotaJugador) // Escuchamos cuando se haga el evento "click", y con el segundo parametro le indicamos lo que queremos que haga (llamarla funcion)
 
     /*let botonAtaqueFuego = document.getElementById("botonFuego")
@@ -15,10 +22,10 @@ function iniciarJuego(){//funcion que realizar cuando se termine de cargar el ht
     botonAtaqueAgua.addEventListener("click",ataqueAgua)
 
     let botonAtaqueTierra = document.getElementById("botonTierra")
-    botonAtaqueTierra.addEventListener("click",ataqueTierra)*/
+    botonAtaqueTierra.addEventListener("click",ataqueTierra)
 
     let botonReiniciar = document.getElementById("botonReiniciar")
-    botonReiniciar.addEventListener("click",reiniciarJuego)
+    botonReiniciar.addEventListener("click",reiniciarJuego)*/
 }
 //funcion para aleatorio
 function aleatorio(min,max){
@@ -37,8 +44,6 @@ function seleccionarMascotaJugador(){//funcion para que el usuario escoja mascot
     let spanMascotaJugador = document.getElementById("mascotaJugador")
     //Variable bandera
     let jugar = true
-    
-
     //Realizamos el proceso de seleccion de mascota, revisamos uno por uno de los botones cual esta encendido y cual no para poder saberlo
     if (inputHipodoge.checked == true) { 
         spanMascotaJugador.innerHTML="Hipodoge"//.innerHTML nos ayuda a poder ver o capturar el html que hay dentro de la etiqueta span, luego es solo cambiarlo 
@@ -56,18 +61,29 @@ function seleccionarMascotaJugador(){//funcion para que el usuario escoja mascot
         jugar = false
         alert("No pos valista verga compadre")
     }
-
     //Llamamos la funcion para la mascota del enemigo
     if (jugar==true) {
+        //quitar la seccion mascota
+        let sectionSeleccionarMascota = document.getElementById("seleccionarMascota")
+        sectionSeleccionarMascota.style.display="none"
+        //habilitar seccion ataque
+        let sectionSeleccionarAtaque = document.getElementById("seleccionarAtaque")
+        sectionSeleccionarAtaque.style.display="block"
+        //habilitar boton reiniciar
+        let botonReiniciar = document.getElementById("botonReiniciar")
+        botonReiniciar.disabled=false
+        botonReiniciar.addEventListener("click",reiniciarJuego)
+        //llamamos la funcion para seleccionar la mascota del enemigo
         seleccionarMascotaEnemigo()
+        //seccion para habilitar boton de ataque de fuego
         let botonAtaqueFuego = document.getElementById("botonFuego")
         botonAtaqueFuego.disabled=false
         botonAtaqueFuego.addEventListener("click",ataqueFuego)
-
+        //seccion para habilitar boton de ataque de agua
         let botonAtaqueAgua = document.getElementById("botonAgua")
         botonAtaqueAgua.disabled=false
         botonAtaqueAgua.addEventListener("click",ataqueAgua)
-
+        //seccion para habilitar boton de ataque de tierra
         let botonAtaqueTierra = document.getElementById("botonTierra")
         botonAtaqueTierra.disabled=false
         botonAtaqueTierra.addEventListener("click",ataqueTierra)
@@ -86,20 +102,21 @@ function crearMensaje(resultado) {
 //Funcion para crear el mensaje final
 function crearMensajeFinal(resultadoFinal) {
     let  sectionMensajes = document.getElementById("mensajes")
-
     let parrafo = document.createElement("p")//CreateElement nos sirve para crear un elemento o etiqueta html, la cual especificamos en los parentesis
     parrafo.innerHTML = resultadoFinal //al parrafo le introducimos la cadena que queremos mostrar
-
     sectionMensajes.appendChild(parrafo)//introducimos el parrafo dentro de la seccion de mensajes
-
+    //seccion para deshabilitar boton de ataque de fuego
     let botonAtaqueFuego = document.getElementById("botonFuego")
     botonAtaqueFuego.disabled=true
-
+    //seccion para deshabilitar boton de ataque de agua
     let botonAtaqueAgua = document.getElementById("botonAgua")
     botonAtaqueAgua.disabled=true
-
+    //seccion para deshabilitar boton de ataque de tierra
     let botonAtaqueTierra = document.getElementById("botonTierra")
     botonAtaqueTierra.disabled=true
+    //habilitar seccion reiniciar
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display="block"
 }
 //revisamos si algunos de los dos jugadores ha perdido
 function revisarVidas() {
