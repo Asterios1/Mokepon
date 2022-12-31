@@ -1,18 +1,24 @@
 let ataqueJugador = "" 
 let ataqueEnemigo = ""
+let vidasJugador = 3
+let vidasEnemigo = 3
+
 //Funcion para iniciar el juego cuando el jugador le de click a la mascota
 function iniciarJuego(){//funcion que realizar cuando se termine de cargar el html
     let botonMascotajugador = document.getElementById("botonMascotas") //creamos una variable y le indicamos al documento (html) que nos traiga lo que tenga el ID deseado
     botonMascotajugador.addEventListener("click",seleccionarMascotaJugador) // Escuchamos cuando se haga el evento "click", y con el segundo parametro le indicamos lo que queremos que haga (llamarla funcion)
 
-    let botonAtaqueFuego = document.getElementById("botonFuego")
+    /*let botonAtaqueFuego = document.getElementById("botonFuego")
     botonAtaqueFuego.addEventListener("click",ataqueFuego)
 
     let botonAtaqueAgua = document.getElementById("botonAgua")
     botonAtaqueAgua.addEventListener("click",ataqueAgua)
 
     let botonAtaqueTierra = document.getElementById("botonTierra")
-    botonAtaqueTierra.addEventListener("click",ataqueTierra)
+    botonAtaqueTierra.addEventListener("click",ataqueTierra)*/
+
+    let botonReiniciar = document.getElementById("botonReiniciar")
+    botonReiniciar.addEventListener("click",reiniciarJuego)
 }
 //funcion para aleatorio
 function aleatorio(min,max){
@@ -54,10 +60,21 @@ function seleccionarMascotaJugador(){//funcion para que el usuario escoja mascot
     //Llamamos la funcion para la mascota del enemigo
     if (jugar==true) {
         seleccionarMascotaEnemigo()
+        let botonAtaqueFuego = document.getElementById("botonFuego")
+        botonAtaqueFuego.disabled=false
+        botonAtaqueFuego.addEventListener("click",ataqueFuego)
+
+        let botonAtaqueAgua = document.getElementById("botonAgua")
+        botonAtaqueAgua.disabled=false
+        botonAtaqueAgua.addEventListener("click",ataqueAgua)
+
+        let botonAtaqueTierra = document.getElementById("botonTierra")
+        botonAtaqueTierra.disabled=false
+        botonAtaqueTierra.addEventListener("click",ataqueTierra)
     }
     
 }
-
+//Funcion para crear el mensaje de resultados
 function crearMensaje(resultado) {
     let  sectionMensajes = document.getElementById("mensajes")
 
@@ -66,20 +83,56 @@ function crearMensaje(resultado) {
 
     sectionMensajes.appendChild(parrafo)//introducimos el parrafo dentro de la seccion de mensajes
 }
+//Funcion para crear el mensaje final
+function crearMensajeFinal(resultadoFinal) {
+    let  sectionMensajes = document.getElementById("mensajes")
 
+    let parrafo = document.createElement("p")//CreateElement nos sirve para crear un elemento o etiqueta html, la cual especificamos en los parentesis
+    parrafo.innerHTML = resultadoFinal //al parrafo le introducimos la cadena que queremos mostrar
 
+    sectionMensajes.appendChild(parrafo)//introducimos el parrafo dentro de la seccion de mensajes
+
+    let botonAtaqueFuego = document.getElementById("botonFuego")
+    botonAtaqueFuego.disabled=true
+
+    let botonAtaqueAgua = document.getElementById("botonAgua")
+    botonAtaqueAgua.disabled=true
+
+    let botonAtaqueTierra = document.getElementById("botonTierra")
+    botonAtaqueTierra.disabled=true
+}
+//revisamos si algunos de los dos jugadores ha perdido
+function revisarVidas() {
+    if (vidasEnemigo==0){
+        crearMensajeFinal("¡¡FELICITACIONES!!😁😁😁😁 ¡¡GANASTE!!")
+    } else if(vidasJugador==0){
+        crearMensajeFinal("Lo siento mucho, perdiste cosita hermosa 😔😔😔")
+    }
+}
+//funcion para el combate
 function combate() {
+    let spanVidasJugador = document.getElementById("vidasJugador")
+    let spanVidasEnemigo = document.getElementById("vidasEnemigo")
     if (ataqueEnemigo == ataqueJugador) {
         crearMensaje("Empate")
     } else if (ataqueJugador=="Fuego"&&ataqueEnemigo=="Tierra") {
         crearMensaje("Ganaste")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML=vidasEnemigo
     } else if (ataqueJugador=="Agua"&&ataqueEnemigo=="Fuego") {
         crearMensaje("Ganaste")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML=vidasEnemigo
     } else if (ataqueJugador=="Tierra"&&ataqueEnemigo=="Agua") {
         crearMensaje("Ganaste")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML=vidasEnemigo
     } else {
         crearMensaje("Perdiste")
+        vidasJugador--
+        spanVidasJugador.innerHTML=vidasJugador
     }
+    revisarVidas()
 }
 //Funcion para seleccionar la mascota del enemigo
 function seleccionarMascotaEnemigo(){
@@ -102,6 +155,7 @@ function seleccionarMascotaEnemigo(){
         spanMascotaEnemigo.innerHTML="Pydos"
     }
 }
+//Funcion para seleccionar aleatoriamente el ataque de un enemigo
 function ataqueAleatorioEnemigo() {
     let ataqueAleatorio = aleatorio(1,3)
     if (ataqueAleatorio == 1) {
@@ -114,21 +168,26 @@ function ataqueAleatorioEnemigo() {
 
     combate()
 }
-
-
+//Funcion para tipos de ataques
+//Funcion de ataque de fuego
 function ataqueFuego(){
     ataqueJugador="Fuego"
     ataqueAleatorioEnemigo()
 }
+//Funcion de ataque de agua
 function ataqueAgua(){
     ataqueJugador="Agua"
     ataqueAleatorioEnemigo()
 }
+//funcion de ataque de tierra
 function ataqueTierra(){
     ataqueJugador="Tierra"
     ataqueAleatorioEnemigo()
 }
-
+//Funcion para reiniciar el juego por completo
+function reiniciarJuego() {
+    location.reload()
+}
 
 
 window.addEventListener("load", iniciarJuego)//Creamos un nuevo evento para poder escuchar cuando el html se termine de cargar y poder activar el js
